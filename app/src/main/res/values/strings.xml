@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">EazyWalls</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">home</string>
+    <string name="category">category</string>
+    <string name="search">search</string>
+    <string name="setting">setting</string>
+    <string name="opendrawer">openDrawer</string>
+    <string name="closedrawer">closeDrawer</string>
+    <string name="home_featured_layout_heading">Featured.</string>
+    <string name="trending">Trending</string>
+    <string name="fire_icon">fire_icon</string>
+    <string name="main_landing_view">main landing view</string>
+    <string name="sub_images">sub images</string>
 </resources>
