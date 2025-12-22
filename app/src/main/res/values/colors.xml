@@ -7,6 +7,8 @@
     <color name="nav_bar_background">@color/allBlack</color>
     <color name="applyBtn">@color/uiBlue</color>
     <color name="lightGreyText">#B9B9B9</color>
+    <color name="icon_lightGrey">#BCB8B8</color>
     <color name="uiBlue">#8768FF</color>
     <color name="red">#F70000</color>
+    <color name="outline_color">#898C94</color>
 </resources>

@@ -17,17 +17,21 @@ import com.rtech.eazywalls.constants.FragmentId;
 import com.rtech.eazywalls.databinding.ActivityHomeBinding;
 import com.rtech.eazywalls.fragments.CategoryFragment;
 import com.rtech.eazywalls.fragments.HomeFragment;
+import com.rtech.eazywalls.viewModels.CategoryViewModel;
 import com.rtech.eazywalls.viewModels.TrendingWallpaperViewModel;
-import com.rtech.eazywalls.viewModels.WallpapersViewModel;
+
 
 
 public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding mainXml;
-    int currentSelected;
+    int currentSelectedMenuItem;
     TrendingWallpaperViewModel trendingWallpaperViewModel;
+    CategoryViewModel categoryViewModel;
+    boolean isFirstLaunch=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        isFirstLaunch=false;
         mainXml=ActivityHomeBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -46,8 +50,10 @@ public class HomeActivity extends AppCompatActivity {
 
     }
     private void init(){
+        categoryViewModel=new ViewModelProvider(this).get(CategoryViewModel.class);
         trendingWallpaperViewModel= new ViewModelProvider(this).get(TrendingWallpaperViewModel.class);
         trendingWallpaperViewModel.getTrendingWallpapers();
+        categoryViewModel.getCategoryLiveData();
     }
     private void handlerFragmentStackChange() {
         getSupportFragmentManager().addOnBackStackChangedListener(()->{
@@ -75,18 +81,26 @@ public class HomeActivity extends AppCompatActivity {
             final int search=R.id.search;
             final int setting=R.id.setting;
             final int menuId=menuItem.getItemId();
-            if(currentSelected==menuId)return false;
+            if(currentSelectedMenuItem ==menuId)return true;
             if(menuId==home){
-                changeFragment(new HomeFragment(), FragmentId.HOME_FRAGMENT.toString());
+                if(getSupportFragmentManager().getBackStackEntryCount()>0){
+                    getSupportFragmentManager().popBackStack(FragmentId.HOME_FRAGMENT.toString(),0);
+
+                }else{
+                    changeFragment(new HomeFragment(), FragmentId.HOME_FRAGMENT.toString());
+                }
+                currentSelectedMenuItem =menuId;
+
 
             }   else if(menuId==category){
                 changeFragment(new CategoryFragment(), FragmentId.CATEGORY_FRAGMENT.toString());
+                currentSelectedMenuItem =menuId;
             }else if(menuId==search){
                     startActivity(new Intent(HomeActivity.this,SearchActivity.class));
             }else if(menuId==setting){
                    startActivity(new Intent(HomeActivity.this,SettingsActivity.class));
                 }
-            currentSelected=menuId;
+
             return true;
         });
         mainXml.navigationMenu.setSelectedItemId(R.id.home);
@@ -95,7 +109,6 @@ public class HomeActivity extends AppCompatActivity {
         FragmentManager fragmentManager=getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(mainXml.fragmentHolder.getId(),fragment).addToBackStack(id).commit();
     }
-
 
 
 }

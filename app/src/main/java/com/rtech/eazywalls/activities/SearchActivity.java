@@ -9,21 +9,41 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.rtech.eazywalls.R;
+import com.rtech.eazywalls.adapters.searchActivityAdapters.TabLayoutAdapter;
 import com.rtech.eazywalls.databinding.ActivitySearchBinding;
 
 public class SearchActivity extends AppCompatActivity {
     ActivitySearchBinding mainXml;
+    TabLayoutAdapter tabLayoutAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mainXml=ActivitySearchBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_search);
+        setContentView(mainXml.getRoot());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        init();
+        setUpTabLayout();
+        setUpClickHandler();
+    }
+
+    private void setUpClickHandler() {
+        mainXml.closeBtn.setOnClickListener(v->finish());
+    }
+
+    private void setUpTabLayout() {
+        mainXml.viewPager.setAdapter(tabLayoutAdapter);
+        mainXml.tabLayout.setupWithViewPager(mainXml.viewPager);
+        mainXml.tabLayout.setTabRippleColor(null);
+
+    }
+
+    private void init(){
+        tabLayoutAdapter=new TabLayoutAdapter(getSupportFragmentManager());
     }
 }

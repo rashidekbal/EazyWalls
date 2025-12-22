@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.rtech.eazywalls.R;
 import com.rtech.eazywalls.adapters.CategoryAdapter;
 import com.rtech.eazywalls.databinding.FragmentCategoryBinding;
 import com.rtech.eazywalls.models.CategoryModel;
+import com.rtech.eazywalls.viewModels.CategoryViewModel;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ public class CategoryFragment extends Fragment {
 FragmentCategoryBinding mainXml;
 ArrayList<CategoryModel> categoryModels;
 CategoryAdapter categoryAdapter;
+CategoryViewModel categoryViewModel;
     public CategoryFragment() {
         // Required empty public constructor
     }
@@ -45,13 +48,16 @@ CategoryAdapter categoryAdapter;
 
     private void init() {
         categoryModels=new ArrayList<>();
-        categoryModels.add(new CategoryModel(1,"Abstract","https://img.freepik.com/free-photo/enchanted-forest-fantasy-background_23-2151910723.jpg",640));
-        categoryModels.add(new CategoryModel(2,"Architect","https://img.freepik.com/free-vector/hand-painted-watercolour-tree-landscape-background_1048-18808.jpg",480));
-        categoryModels.add(new CategoryModel(3,"ColorFull","https://img.freepik.com/free-photo/surreal-neon-tropical-flowers_23-2151665782.jpg",600));
-        categoryModels.add(new CategoryModel(4,"Nature","https://img.freepik.com/free-photo/digital-art-moon-deer-wallpaper_23-2150918787.jpg",225));
-        categoryModels.add(new CategoryModel(5,"Galaxy","https://img.freepik.com/free-photo/digital-art-moon-man-silhouette-wallpaper_23-2150918889.jpg",442));
-        categoryModels.add(new CategoryModel(6,"Mountains","https://img.freepik.com/free-photo/beautiful-domestic-cat-laying-fence_181624-43207.jpg",225));
+        categoryViewModel=new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
         categoryAdapter=new CategoryAdapter(requireContext(),categoryModels);
+        categoryViewModel.getCategoryLiveData().observe(requireActivity(),categoryList->{
+            if(categoryList!=null){
+                categoryModels.clear();
+                categoryModels.addAll(categoryList);
+                categoryAdapter.notifyDataSetChanged();
+            }
+
+        });
 
 
     }

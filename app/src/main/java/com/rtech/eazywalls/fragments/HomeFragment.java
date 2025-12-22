@@ -40,7 +40,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void setUpRecyclerView() {
-        wallpaperAdapter=new WallpaperAdapter(requireContext(),sampleData, WallpaperListType.TRENDING.toString());
         mainXml.recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         mainXml.recyclerView.setAdapter(wallpaperAdapter);
 
@@ -48,6 +47,7 @@ public class HomeFragment extends Fragment {
 
     private void init(){
         sampleData=new ArrayList<>();
+        wallpaperAdapter=new WallpaperAdapter(requireContext(),sampleData, WallpaperListType.TRENDING.toString());
         trendingWallpaperViewModel=new ViewModelProvider(requireActivity()).get(TrendingWallpaperViewModel.class);
         trendingWallpaperViewModel.getTrendingWallpapers().observe(requireActivity(),wallpaperList->{
             if(wallpaperList!=null){
