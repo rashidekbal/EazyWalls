@@ -1,5 +1,4 @@
 package com.rtech.eazywalls.activities;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -33,12 +32,21 @@ public class HomeActivity extends AppCompatActivity {
         window.setStatusBarColor(getColor(R.color.allBlack));
         setContentView(mainXml.getRoot());
         setSupportActionBar(mainXml.toolBar);
+        handlerFragmentStackChange();
         setUpActionBar();
         setUpNavigationBar();
 
 
 
 
+    }
+
+    private void handlerFragmentStackChange() {
+        getSupportFragmentManager().addOnBackStackChangedListener(()->{
+            if(getSupportFragmentManager().getBackStackEntryCount()==0){
+                super.onBackPressed();
+            }
+        });
     }
 
     private void setUpActionBar() {

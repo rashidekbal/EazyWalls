@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
 
     <application
         android:name=".EazyWalls"
@@ -15,7 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EazyWalls">
         <activity
-            android:name=".activities.WallpaperHandlerActivity"
+            android:name=".activities.PreviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CategoryActivity"
             android:exported="false" />
         <activity
             android:name=".activities.SettingsActivity"

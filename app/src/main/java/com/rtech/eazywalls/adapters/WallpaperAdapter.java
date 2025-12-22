@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rtech.eazywalls.R;
-import com.rtech.eazywalls.activities.WallpaperHandlerActivity;
+import com.rtech.eazywalls.activities.PreviewActivity;
 import com.rtech.eazywalls.models.WallpaperModel;
 import com.rtech.eazywalls.utils.CoilUtil;
 
@@ -55,7 +55,8 @@ public class WallpaperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             holder.favouriteBtn.setImageResource(R.drawable.heart_icon_inactive);
         }
         holder.itemView.setOnClickListener(v->{
-            Intent handlerIntent=new Intent(context, WallpaperHandlerActivity.class);
+            Intent handlerIntent=new Intent(context, PreviewActivity.class);
+            handlerIntent.putExtra("id",wallpaperModels.get(position).getId());
             handlerIntent.putExtra("url",wallpaperModels.get(position).getUrl());
             handlerIntent.putExtra("isFavourite",wallpaperModels.get(position).isFavourite());
             context.startActivity(handlerIntent);

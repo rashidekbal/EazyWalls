@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bottomsheet_curve"
+    android:paddingHorizontal="20dp"
+    android:orientation="vertical"
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_4">
+    <View
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="6dp"
+        android:background="@drawable/bar_appearence"
+        android:layout_centerHorizontal="true"
+        android:alpha="0.7"
+        />
+</RelativeLayout>
+
+
+
+    <TextView
+        android:id="@+id/set_lock_screen_btn"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set as Lock screen"
+        style="@style/bottom_sheet_options"
+        />
+    <TextView
+        android:id="@+id/set_home_screen_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set as Home screen"
+        style="@style/bottom_sheet_options"
+        android:layout_marginTop="@dimen/dp_10"/>
+    <TextView
+        android:id="@+id/set_both_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set as both"
+        style="@style/bottom_sheet_options"
+        android:layout_marginTop="@dimen/dp_10"
+        />
+    <TextView
+        android:id="@+id/report_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Report this Image"
+        style="@style/bottom_sheet_options"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="20dp"/>
+
+
+</LinearLayout>

@@ -5,6 +5,7 @@
     <color name="allBlack">#FF000000</color>
     <color name="allWhite">#FFFFFFFF</color>
     <color name="nav_bar_background">@color/allBlack</color>
+    <color name="applyBtn">@color/uiBlue</color>
     <color name="uiBlue">#8768FF</color>
     <color name="red">#F70000</color>
 </resources>

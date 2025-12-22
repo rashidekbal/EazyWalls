@@ -8,9 +8,11 @@
     <string name="setting">setting</string>
     <string name="opendrawer">openDrawer</string>
     <string name="closedrawer">closeDrawer</string>
-    <string name="home_featured_layout_heading">Featured.</string>
+    <string name="home_featured_layout_heading">Featured</string>
     <string name="trending">Trending</string>
     <string name="fire_icon">fire_icon</string>
     <string name="main_landing_view">main landing view</string>
     <string name="sub_images">sub images</string>
+    <string name="collections">Collections</string>
+    <string name="apply">Apply</string>
 </resources>
