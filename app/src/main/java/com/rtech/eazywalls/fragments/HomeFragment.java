@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.view.LayoutInflater;
@@ -11,8 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rtech.eazywalls.adapters.WallpaperAdapter;
+import com.rtech.eazywalls.constants.WallpaperListType;
 import com.rtech.eazywalls.databinding.FragmentHomeBinding;
 import com.rtech.eazywalls.models.WallpaperModel;
+import com.rtech.eazywalls.viewModels.TrendingWallpaperViewModel;
 
 import java.util.ArrayList;
 
@@ -20,6 +23,7 @@ public class HomeFragment extends Fragment {
     FragmentHomeBinding mainXml;
     ArrayList<WallpaperModel> sampleData;
     WallpaperAdapter wallpaperAdapter;
+    TrendingWallpaperViewModel trendingWallpaperViewModel;
 
 
     public HomeFragment() {
@@ -36,7 +40,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void setUpRecyclerView() {
-        wallpaperAdapter=new WallpaperAdapter(requireContext(),sampleData);
+        wallpaperAdapter=new WallpaperAdapter(requireContext(),sampleData, WallpaperListType.TRENDING.toString());
         mainXml.recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         mainXml.recyclerView.setAdapter(wallpaperAdapter);
 
@@ -44,12 +48,13 @@ public class HomeFragment extends Fragment {
 
     private void init(){
         sampleData=new ArrayList<>();
-        sampleData.add(new WallpaperModel(1,"https://img.freepik.com/free-photo/enchanted-forest-fantasy-background_23-2151910723.jpg",true));
-        sampleData.add(new WallpaperModel(2,"https://img.freepik.com/free-vector/hand-painted-watercolour-tree-landscape-background_1048-18808.jpg",true));
-        sampleData.add(new WallpaperModel(3,"https://img.freepik.com/free-photo/surreal-neon-tropical-flowers_23-2151665782.jpg",false));
-        sampleData.add(new WallpaperModel(4,"https://img.freepik.com/free-photo/digital-art-moon-deer-wallpaper_23-2150918787.jpg",true));
-        sampleData.add(new WallpaperModel(5,"https://img.freepik.com/free-photo/digital-art-moon-man-silhouette-wallpaper_23-2150918889.jpg",false));
-        sampleData.add(new WallpaperModel(6,"https://img.freepik.com/free-photo/beautiful-domestic-cat-laying-fence_181624-43207.jpg",true));
-
+        trendingWallpaperViewModel=new ViewModelProvider(requireActivity()).get(TrendingWallpaperViewModel.class);
+        trendingWallpaperViewModel.getTrendingWallpapers().observe(requireActivity(),wallpaperList->{
+            if(wallpaperList!=null){
+                sampleData.clear();
+                sampleData.addAll(wallpaperList);
+                wallpaperAdapter.notifyDataSetChanged();
+            }
+        });
     }
 }

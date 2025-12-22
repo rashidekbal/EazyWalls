@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rtech.eazywalls.R;
 import com.rtech.eazywalls.activities.CategoryActivity;
+import com.rtech.eazywalls.constants.CategoryIntentKeys;
 import com.rtech.eazywalls.models.CategoryModel;
 import com.rtech.eazywalls.utils.CoilUtil;
 
@@ -69,7 +70,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         CoilUtil.loadImage(holder.imageView,getImageUrl(position));
         holder.imageView.setOnClickListener(v->{
             Intent openPage=new Intent(context, CategoryActivity.class);
-            openPage.putExtra("category",getTitle(position));
+            openPage.putExtra(CategoryIntentKeys.TITLE.toString(),getTitle(position));
+            openPage.putExtra(CategoryIntentKeys.WALLPAPERS_COUNT.toString(),categoryModels.get(position).getWallpaperCount());
+            openPage.putExtra(CategoryIntentKeys.ID.toString(),categoryModels.get(position).getId());
+            openPage.putExtra(CategoryIntentKeys.URL.toString(),getImageUrl(position));
             context.startActivity(openPage);
         });
 

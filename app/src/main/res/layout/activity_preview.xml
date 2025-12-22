@@ -119,13 +119,13 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/uiBlue"/>
+            android:background="@color/applyBtn"/>
     </androidx.cardview.widget.CardView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/apply"
-        android:textColor="@color/white"
+        android:textColor="@color/allWhite"
         app:layout_constraintEnd_toEndOf="@id/apply_cardBtn_view"
         app:layout_constraintStart_toStartOf="@id/apply_cardBtn_view"
         app:layout_constraintTop_toTopOf="@id/apply_cardBtn_view"

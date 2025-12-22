@@ -15,4 +15,7 @@
     <string name="sub_images">sub images</string>
     <string name="collections">Collections</string>
     <string name="apply">Apply</string>
+    <string name="backbtn">backbtn</string>
+    <string name="filter_icon">filter_icon</string>
+    <string name="_1270_listed_wallpapers_from_abstract_colletion">1270 listed wallpapers from abstract colletion.</string>
 </resources>

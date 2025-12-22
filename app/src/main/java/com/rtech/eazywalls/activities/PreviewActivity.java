@@ -61,7 +61,7 @@ public class PreviewActivity extends AppCompatActivity {
             dialog.dismiss();
 
         }).show());
-        mainXml.backBtn.setOnClickListener(v->super.onBackPressed());
+        mainXml.backBtn.setOnClickListener(v->finish());
 
     }
 // ------------------------------------ method for settingUp  preview page ------------------------------------- //
@@ -116,10 +116,7 @@ public class PreviewActivity extends AppCompatActivity {
             });
         }
         if(reportBtn!=null){
-            reportBtn.setOnClickListener(v->{
-                ToastUtil.showToast(PreviewActivity.this,"feature yet to be added... ");
-
-            });
+            reportBtn.setOnClickListener(v-> ToastUtil.showToast(PreviewActivity.this,"feature yet to be added... "));
         }
 
 

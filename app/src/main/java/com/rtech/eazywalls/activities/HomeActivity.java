@@ -10,28 +10,33 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.rtech.eazywalls.R;
 import com.rtech.eazywalls.constants.FragmentId;
 import com.rtech.eazywalls.databinding.ActivityHomeBinding;
 import com.rtech.eazywalls.fragments.CategoryFragment;
 import com.rtech.eazywalls.fragments.HomeFragment;
+import com.rtech.eazywalls.viewModels.TrendingWallpaperViewModel;
+import com.rtech.eazywalls.viewModels.WallpapersViewModel;
 
 
 public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding mainXml;
     int currentSelected;
+    TrendingWallpaperViewModel trendingWallpaperViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mainXml=ActivityHomeBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        Window window=getWindow();
+        Window window = getWindow();
         window.getDecorView().setVisibility(View.VISIBLE);
         window.setStatusBarColor(getColor(R.color.allBlack));
         setContentView(mainXml.getRoot());
         setSupportActionBar(mainXml.toolBar);
+        init();
         handlerFragmentStackChange();
         setUpActionBar();
         setUpNavigationBar();
@@ -40,7 +45,10 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
-
+    private void init(){
+        trendingWallpaperViewModel= new ViewModelProvider(this).get(TrendingWallpaperViewModel.class);
+        trendingWallpaperViewModel.getTrendingWallpapers();
+    }
     private void handlerFragmentStackChange() {
         getSupportFragmentManager().addOnBackStackChangedListener(()->{
             if(getSupportFragmentManager().getBackStackEntryCount()==0){

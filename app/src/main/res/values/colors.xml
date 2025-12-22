@@ -6,6 +6,7 @@
     <color name="allWhite">#FFFFFFFF</color>
     <color name="nav_bar_background">@color/allBlack</color>
     <color name="applyBtn">@color/uiBlue</color>
+    <color name="lightGreyText">#B9B9B9</color>
     <color name="uiBlue">#8768FF</color>
     <color name="red">#F70000</color>
 </resources>
