@@ -13,21 +13,20 @@ import com.rtech.eazywalls.repository.WallpaperRepo;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class TrendingWallpaperViewModel extends AndroidViewModel {
-    MutableLiveData<ArrayList<WallpaperModel>> wallpapersMutableLiveData=new MutableLiveData<>();
+public class FeaturedWallpaperViewModel extends AndroidViewModel {
     WallpaperRepo wallpaperRepo;
     int page;
     private boolean isLast;
     private boolean loading;
-    public TrendingWallpaperViewModel(@NonNull Application application) {
+    public FeaturedWallpaperViewModel(@NonNull Application application) {
         super(application);
         this.wallpaperRepo=new WallpaperRepo();
         this.page=1;
         this.loading=false;
         this.isLast=false;
     }
-
-    public LiveData<ArrayList<WallpaperModel>> getTrendingWallpapers(){
+    MutableLiveData<ArrayList<WallpaperModel>> wallpapersMutableLiveData=new MutableLiveData<>();
+    public LiveData<ArrayList<WallpaperModel>> getFeaturedWallpapers(){
         if(wallpapersMutableLiveData==null||wallpapersMutableLiveData.getValue()==null){
             loadWallpapers();
         }
@@ -35,7 +34,7 @@ public class TrendingWallpaperViewModel extends AndroidViewModel {
     }
     private void loadWallpapers() {
         loading=true;
-        wallpaperRepo.getTrendingWallpaper(page,data-> {
+        wallpaperRepo.getFeaturedWallpaper(page,data-> {
             if(data.isEmpty()){isLast=true;}
             loading=false;
             wallpapersMutableLiveData.postValue(data);
@@ -44,7 +43,7 @@ public class TrendingWallpaperViewModel extends AndroidViewModel {
     public void loadMoreWallpapers(){
         if(!isLast&&!loading){
             loading=true;
-            wallpaperRepo.getTrendingWallpaper(++page,data->{
+            wallpaperRepo.getFeaturedWallpaper(++page,data->{
                 if(data.isEmpty()){isLast=true;
                     loading=false;
                     return;

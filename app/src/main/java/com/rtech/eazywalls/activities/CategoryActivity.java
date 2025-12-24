@@ -2,6 +2,7 @@ package com.rtech.eazywalls.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -81,6 +82,7 @@ public class CategoryActivity extends AppCompatActivity {
         }
         category=new CategoryModel(
                 data.getIntExtra(CategoryIntentKeys.ID.toString(),0),
+                data.getStringExtra(CategoryIntentKeys._ID.toString()),
                 data.getStringExtra(CategoryIntentKeys.TITLE.toString()),
                 data.getStringExtra(CategoryIntentKeys.URL.toString()),
                 data.getIntExtra(CategoryIntentKeys.WALLPAPERS_COUNT.toString(),0));
@@ -93,6 +95,8 @@ public class CategoryActivity extends AppCompatActivity {
                 wallpaperModels.clear();
                 wallpaperModels.addAll(wallpapersList);
                 wallpaperAdapter.notifyDataSetChanged();
+                mainXml.shimmerLayout.setVisibility(View.GONE);
+                mainXml.recyclerView.setVisibility(View.VISIBLE);
 
             }
 

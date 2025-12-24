@@ -17,6 +17,7 @@ import com.rtech.eazywalls.constants.FragmentId;
 import com.rtech.eazywalls.databinding.ActivityHomeBinding;
 import com.rtech.eazywalls.fragments.CategoryFragment;
 import com.rtech.eazywalls.fragments.HomeFragment;
+import com.rtech.eazywalls.fragments.SettingsMainFragment;
 import com.rtech.eazywalls.viewModels.CategoryViewModel;
 import com.rtech.eazywalls.viewModels.TrendingWallpaperViewModel;
 
@@ -58,7 +59,7 @@ public class HomeActivity extends AppCompatActivity {
     private void handlerFragmentStackChange() {
         getSupportFragmentManager().addOnBackStackChangedListener(()->{
             if(getSupportFragmentManager().getBackStackEntryCount()==0){
-                super.onBackPressed();
+                finish();
             }
         });
     }
@@ -91,14 +92,14 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 currentSelectedMenuItem =menuId;
 
-
             }   else if(menuId==category){
                 changeFragment(new CategoryFragment(), FragmentId.CATEGORY_FRAGMENT.toString());
                 currentSelectedMenuItem =menuId;
             }else if(menuId==search){
                     startActivity(new Intent(HomeActivity.this,SearchActivity.class));
             }else if(menuId==setting){
-                   startActivity(new Intent(HomeActivity.this,SettingsActivity.class));
+                   changeFragment(new SettingsMainFragment(),FragmentId.SETTINGS_MAIN_FRAGMENT.toString());
+                   currentSelectedMenuItem=menuId;
                 }
 
             return true;

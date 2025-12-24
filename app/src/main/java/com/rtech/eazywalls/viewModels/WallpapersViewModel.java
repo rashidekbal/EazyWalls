@@ -8,13 +8,24 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.rtech.eazywalls.models.WallpaperModel;
+import com.rtech.eazywalls.repository.WallpaperRepo;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class WallpapersViewModel extends AndroidViewModel {
     String category;
+    WallpaperRepo wallpaperRepo;
+    int page;
+    private boolean isLast;
+    private boolean loading;
+
     public WallpapersViewModel(@NonNull Application application) {
         super(application);
+        this.wallpaperRepo=new WallpaperRepo();
+        this.page=1;
+        this.loading=false;
+        this.isLast=false;
     }
     MutableLiveData<ArrayList<WallpaperModel>> wallpapersMutableLiveData=new MutableLiveData<>();
     public LiveData<ArrayList<WallpaperModel>> getWallpapersLiveData(String category){
@@ -25,14 +36,27 @@ public class WallpapersViewModel extends AndroidViewModel {
         return  wallpapersMutableLiveData;
     }
     private void loadWallpapers() {
-        ArrayList<WallpaperModel> sampleData=new ArrayList<>();
-        sampleData.add(new WallpaperModel(1,"https://img.freepik.com/free-photo/enchanted-forest-fantasy-background_23-2151910723.jpg",true));
-        sampleData.add(new WallpaperModel(2,"https://img.freepik.com/free-vector/hand-painted-watercolour-tree-landscape-background_1048-18808.jpg",true));
-        sampleData.add(new WallpaperModel(3,"https://img.freepik.com/free-photo/surreal-neon-tropical-flowers_23-2151665782.jpg",false));
-        sampleData.add(new WallpaperModel(4,"https://img.freepik.com/free-photo/digital-art-moon-deer-wallpaper_23-2150918787.jpg",true));
-        sampleData.add(new WallpaperModel(5,"https://img.freepik.com/free-photo/digital-art-moon-man-silhouette-wallpaper_23-2150918889.jpg",false));
-        sampleData.add(new WallpaperModel(6,"https://img.freepik.com/free-photo/beautiful-domestic-cat-laying-fence_181624-43207.jpg",true));
-        wallpapersMutableLiveData.postValue(sampleData);
+        loading=true;
+        wallpaperRepo.getWallpaperOfCategory(category,page,data-> {
+            if(data.isEmpty()){isLast=true;}
+            loading=false;
+            wallpapersMutableLiveData.postValue(data);
+        });
+    }
+    public void loadMoreWallpapers(){
+        if(!isLast&&!loading){
+            loading=true;
+            wallpaperRepo.getWallpaperOfCategory(category,++page,data->{
+                if(data.isEmpty()){isLast=true;
+                    loading=false;
+                    return;
+                }
+                loading=false;
+                ArrayList<WallpaperModel> tempArray = new ArrayList<>(Objects.requireNonNull(wallpapersMutableLiveData.getValue()));
+                tempArray.addAll(data);
+                wallpapersMutableLiveData.postValue(tempArray);
+            });
+        }
 
     }
 }

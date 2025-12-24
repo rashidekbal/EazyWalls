@@ -55,6 +55,8 @@ CategoryViewModel categoryViewModel;
                 categoryModels.clear();
                 categoryModels.addAll(categoryList);
                 categoryAdapter.notifyDataSetChanged();
+                mainXml.shimmerLayout.setVisibility(View.GONE);
+                mainXml.recyclerView.setVisibility(View.VISIBLE);
             }
 
         });

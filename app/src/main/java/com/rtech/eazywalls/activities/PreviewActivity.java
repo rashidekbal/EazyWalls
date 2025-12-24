@@ -24,6 +24,7 @@ import com.rtech.eazywalls.services.DownloadService;
 import com.rtech.eazywalls.services.WallpaperService;
 import com.rtech.eazywalls.utils.CoilUtil;
 import com.rtech.eazywalls.utils.DownloadManagerUtil;
+import com.rtech.eazywalls.utils.GlideUtil;
 import com.rtech.eazywalls.utils.ToastUtil;
 import com.rtech.eazywalls.utils.WallpaperManagerUtil;
 
@@ -66,7 +67,7 @@ public class PreviewActivity extends AppCompatActivity {
     }
 // ------------------------------------ method for settingUp  preview page ------------------------------------- //
     private void setUpData() {
-        CoilUtil.loadImage(mainXml.previewImage,wallpaperModel.getUrl());
+        GlideUtil.loadImage(this,mainXml.previewImage,wallpaperModel.getUrl(),R.drawable.wallpaper_placeholder);
     }
 // -------------------------------------------- function to init data and objects ----------------------------------//
     private void init(){
@@ -75,7 +76,7 @@ public class PreviewActivity extends AppCompatActivity {
         wallpaperService=new WallpaperService();
         Intent data=getIntent();
         if(data!=null){
-            wallpaperModel=new WallpaperModel(data.getIntExtra("id",0),data.getStringExtra("url"),data.getBooleanExtra("isFavourite",false));
+            wallpaperModel=new WallpaperModel(data.getIntExtra("id",0),data.getStringExtra("_id"),data.getStringExtra("url"),data.getStringExtra("previewUrl"),data.getBooleanExtra("isFavourite",false));
         }
         else{
             Toast.makeText(this,"error occured..",Toast.LENGTH_SHORT).show();

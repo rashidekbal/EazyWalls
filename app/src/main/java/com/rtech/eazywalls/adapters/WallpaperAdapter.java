@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.rtech.eazywalls.R;
 import com.rtech.eazywalls.activities.PreviewActivity;
 import com.rtech.eazywalls.constants.WallpaperListType;
@@ -20,6 +21,7 @@ import com.rtech.eazywalls.models.WallpaperModel;
 import com.rtech.eazywalls.services.DownloadService;
 import com.rtech.eazywalls.utils.CoilUtil;
 import com.rtech.eazywalls.utils.DownloadManagerUtil;
+import com.rtech.eazywalls.utils.GlideUtil;
 
 import java.util.ArrayList;
 
@@ -75,7 +77,7 @@ public class WallpaperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void bindWallpaperV2(int position, RecyclerView.ViewHolder viewHolder) {
         WallpaperViewHolderV2 holder=(WallpaperViewHolderV2) viewHolder;
-        CoilUtil.loadImage(holder.imageView,wallpaperModels.get(position).getUrl());
+        GlideUtil.loadImage(context,holder.imageView,wallpaperModels.get(position).getUrl(),R.drawable.wallpaper_placeholder);
         if(wallpaperModels.get(position).isFavourite()){
             holder.favouriteBtn.setImageResource(R.drawable.heart_active);}
         else{
@@ -84,12 +86,14 @@ public class WallpaperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         holder.itemView.setOnClickListener(v->{
             Intent handlerIntent=new Intent(context, PreviewActivity.class);
             handlerIntent.putExtra("id",wallpaperModels.get(position).getId());
+            handlerIntent.putExtra("_id",wallpaperModels.get(position).get_id());
             handlerIntent.putExtra("url",wallpaperModels.get(position).getUrl());
+            handlerIntent.putExtra("previewUrl",wallpaperModels.get(position).getPreviewUrl());
             handlerIntent.putExtra("isFavourite",wallpaperModels.get(position).isFavourite());
             context.startActivity(handlerIntent);
         });
         holder.downloadBtn.setOnClickListener(v -> {
-            new AlertDialog.Builder(context).setTitle("Dowload").setMessage("Do you want to download this wallpaper").setCancelable(true)
+            new AlertDialog.Builder(context).setTitle("Download").setMessage("Do you want to download this wallpaper").setCancelable(true)
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -111,7 +115,7 @@ public class WallpaperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void bindWallpaperV1(int position, RecyclerView.ViewHolder viewHolder) {
         WallpaperViewHolder holder=(WallpaperViewHolder) viewHolder;
-        CoilUtil.loadImage(holder.imageView,wallpaperModels.get(position).getUrl());
+        GlideUtil.loadImage(context,holder.imageView,wallpaperModels.get(position).getUrl(),R.drawable.wallpaper_placeholder);
         if(wallpaperModels.get(position).isFavourite()){
             holder.favouriteBtn.setImageResource(R.drawable.heart_active);}
         else{

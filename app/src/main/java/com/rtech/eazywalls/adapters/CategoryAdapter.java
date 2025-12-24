@@ -16,6 +16,7 @@ import com.rtech.eazywalls.activities.CategoryActivity;
 import com.rtech.eazywalls.constants.CategoryIntentKeys;
 import com.rtech.eazywalls.models.CategoryModel;
 import com.rtech.eazywalls.utils.CoilUtil;
+import com.rtech.eazywalls.utils.GlideUtil;
 
 import java.util.ArrayList;
 
@@ -67,16 +68,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         CategoryViewHolder holder=(CategoryViewHolder) viewHolder;
         holder.titleText.setText(getTitle(position));
         holder.wallpaperCountText.setText(getWallpaperCount(position));
-        CoilUtil.loadImage(holder.imageView,getImageUrl(position));
+       GlideUtil.loadImage(context,holder.imageView,getImageUrl(position),R.drawable.wallpaper_placeholder);
         holder.imageView.setOnClickListener(v->{
             Intent openPage=new Intent(context, CategoryActivity.class);
+            openPage.putExtra(CategoryIntentKeys._ID.toString(),get_ID(position));
             openPage.putExtra(CategoryIntentKeys.TITLE.toString(),getTitle(position));
             openPage.putExtra(CategoryIntentKeys.WALLPAPERS_COUNT.toString(),categoryModels.get(position).getWallpaperCount());
             openPage.putExtra(CategoryIntentKeys.ID.toString(),categoryModels.get(position).getId());
             openPage.putExtra(CategoryIntentKeys.URL.toString(),getImageUrl(position));
             context.startActivity(openPage);
         });
-
 
     }
 
@@ -87,8 +88,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         int itemCount=categoryModels.get(position).getWallpaperCount();
         StringBuilder string =new StringBuilder();
         string.append(itemCount);
-        string.append("wallpapers");
+        string.append(" wallpapers");
         return string;
+    }
+    private String get_ID(int position){
+        return categoryModels.get(position).get_id();
     }
     private String getImageUrl(int position){
         return categoryModels.get(position).getUrl();

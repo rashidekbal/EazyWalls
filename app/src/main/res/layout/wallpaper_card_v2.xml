@@ -8,16 +8,18 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/image_card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_250"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cardCornerRadius="@dimen/dp_20">
+        app:cardCornerRadius="@dimen/dp_20"
+        android:elevation="2dp">
         <ImageView
+            android:elevation="2dp"
             android:id="@+id/wallpaper_imageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@drawable/samplebackground"
             />

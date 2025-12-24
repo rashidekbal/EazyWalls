@@ -54,6 +54,8 @@ public class HomeFragment extends Fragment {
                 sampleData.clear();
                 sampleData.addAll(wallpaperList);
                 wallpaperAdapter.notifyDataSetChanged();
+                mainXml.shimmerLayout.setVisibility(View.GONE);
+                mainXml.recyclerView.setVisibility(View.VISIBLE);
             }
         });
     }

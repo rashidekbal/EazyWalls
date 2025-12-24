@@ -10,6 +10,7 @@ public class EazyWalls extends Application {
     public void onCreate() {
         instance=this;
         super.onCreate();
+        Core.init(this);
     }
     public static EazyWalls getInstance(){
         return instance;
