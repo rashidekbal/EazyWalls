@@ -13,11 +13,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.rtech.eazywalls.R;
-import com.rtech.eazywalls.constants.FragmentId;
-import com.rtech.eazywalls.databinding.ActivityHomeBinding;
 import com.rtech.eazywalls.fragments.CategoryFragment;
 import com.rtech.eazywalls.fragments.HomeFragment;
 import com.rtech.eazywalls.fragments.SettingsMainFragment;
+import com.rtech.eazywalls.constants.FragmentId;
+import com.rtech.eazywalls.databinding.ActivityHomeBinding;
+import com.rtech.eazywalls.utils.ToastUtil;
 import com.rtech.eazywalls.viewModels.CategoryViewModel;
 import com.rtech.eazywalls.viewModels.TrendingWallpaperViewModel;
 
@@ -60,7 +61,23 @@ public class HomeActivity extends AppCompatActivity {
         getSupportFragmentManager().addOnBackStackChangedListener(()->{
             if(getSupportFragmentManager().getBackStackEntryCount()==0){
                 finish();
+                return;
             }
+            int entryCount=getSupportFragmentManager().getBackStackEntryCount();
+            String entryId=getSupportFragmentManager().getBackStackEntryAt(entryCount-1).getName();
+            if(entryId!=null){
+                if(!entryId.equals(FragmentId.SETTINGS_MAIN_FRAGMENT.toString())){
+                    mainXml.navigationMenu.setVisibility(View.VISIBLE);
+                }
+                if(entryId.equals(FragmentId.HOME_FRAGMENT.toString())){
+                    mainXml.navigationMenu.setSelectedItemId(R.id.home);
+                    currentSelectedMenuItem=R.id.home;
+                }else if (entryId.equals(FragmentId.CATEGORY_FRAGMENT.toString())){
+                    mainXml.navigationMenu.setSelectedItemId(R.id.category);
+                    currentSelectedMenuItem=R.id.category;
+                }
+            }
+
         });
     }
 
@@ -96,8 +113,11 @@ public class HomeActivity extends AppCompatActivity {
                 changeFragment(new CategoryFragment(), FragmentId.CATEGORY_FRAGMENT.toString());
                 currentSelectedMenuItem =menuId;
             }else if(menuId==search){
-                    startActivity(new Intent(HomeActivity.this,SearchActivity.class));
+                    startActivity(new Intent(HomeActivity.this, SearchActivity.class));
+                    return false;
             }else if(menuId==setting){
+//                TODO: hide the bottom navigation bar when settings fragment is opened
+                   mainXml.navigationMenu.setVisibility(View.GONE);
                    changeFragment(new SettingsMainFragment(),FragmentId.SETTINGS_MAIN_FRAGMENT.toString());
                    currentSelectedMenuItem=menuId;
                 }
