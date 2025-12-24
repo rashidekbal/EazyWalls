@@ -77,20 +77,14 @@ public class WallpaperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void bindWallpaperV2(int position, RecyclerView.ViewHolder viewHolder) {
         WallpaperViewHolderV2 holder=(WallpaperViewHolderV2) viewHolder;
-        GlideUtil.loadImage(context,holder.imageView,wallpaperModels.get(position).getUrl(),R.drawable.wallpaper_placeholder);
+        GlideUtil.loadImage(context,holder.imageView,wallpaperModels.get(position).getPreviewUrl(),R.drawable.wallpaper_placeholder);
         if(wallpaperModels.get(position).isFavourite()){
             holder.favouriteBtn.setImageResource(R.drawable.heart_active);}
         else{
             holder.favouriteBtn.setImageResource(R.drawable.heart_icon_inactive);
         }
         holder.itemView.setOnClickListener(v->{
-            Intent handlerIntent=new Intent(context, PreviewActivity.class);
-            handlerIntent.putExtra("id",wallpaperModels.get(position).getId());
-            handlerIntent.putExtra("_id",wallpaperModels.get(position).get_id());
-            handlerIntent.putExtra("url",wallpaperModels.get(position).getUrl());
-            handlerIntent.putExtra("previewUrl",wallpaperModels.get(position).getPreviewUrl());
-            handlerIntent.putExtra("isFavourite",wallpaperModels.get(position).isFavourite());
-            context.startActivity(handlerIntent);
+            openPreviewPage(position);
         });
         holder.downloadBtn.setOnClickListener(v -> {
             new AlertDialog.Builder(context).setTitle("Download").setMessage("Do you want to download this wallpaper").setCancelable(true)
@@ -115,21 +109,26 @@ public class WallpaperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void bindWallpaperV1(int position, RecyclerView.ViewHolder viewHolder) {
         WallpaperViewHolder holder=(WallpaperViewHolder) viewHolder;
-        GlideUtil.loadImage(context,holder.imageView,wallpaperModels.get(position).getUrl(),R.drawable.wallpaper_placeholder);
+        GlideUtil.loadImage(context,holder.imageView,wallpaperModels.get(position).getPreviewUrl(),R.drawable.wallpaper_placeholder);
         if(wallpaperModels.get(position).isFavourite()){
             holder.favouriteBtn.setImageResource(R.drawable.heart_active);}
         else{
             holder.favouriteBtn.setImageResource(R.drawable.heart_icon_inactive);
         }
         holder.itemView.setOnClickListener(v->{
-            Intent handlerIntent=new Intent(context, PreviewActivity.class);
-            handlerIntent.putExtra("id",wallpaperModels.get(position).getId());
-            handlerIntent.putExtra("url",wallpaperModels.get(position).getUrl());
-            handlerIntent.putExtra("isFavourite",wallpaperModels.get(position).isFavourite());
-            context.startActivity(handlerIntent);
+           openPreviewPage(position);
         });
 
 
+    }
+    private void openPreviewPage(int position){
+        Intent handlerIntent=new Intent(context, PreviewActivity.class);
+        handlerIntent.putExtra("id",wallpaperModels.get(position).getId());
+        handlerIntent.putExtra("_id",wallpaperModels.get(position).get_id());
+        handlerIntent.putExtra("url",wallpaperModels.get(position).getUrl());
+        handlerIntent.putExtra("previewUrl",wallpaperModels.get(position).getPreviewUrl());
+        handlerIntent.putExtra("isFavourite",wallpaperModels.get(position).isFavourite());
+        context.startActivity(handlerIntent);
     }
 
     @Override
