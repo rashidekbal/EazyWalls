@@ -1,11 +1,14 @@
 package com.rtech.eazywalls.activities;
 
+import static com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HALF_EXPANDED;
+
 import android.app.AlertDialog;
 import android.app.WallpaperManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +18,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.rtech.eazywalls.R;
 import com.rtech.eazywalls.databinding.ActivityPreviewBinding;
@@ -88,6 +92,11 @@ public class PreviewActivity extends AppCompatActivity {
         BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(this,R.style.TransparentBottomSheet);
         bottomSheetDialog.setContentView(R.layout.wallpaper_apply_bottomsheet);
         bottomSheetDialog.setCancelable(true);
+        FrameLayout frameLayout=bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+        assert frameLayout!=null;
+        BottomSheetBehavior<FrameLayout> behavior=BottomSheetBehavior.from(frameLayout);
+        behavior.setDraggable(true);
+        behavior.setFitToContents(true);
         set_BottomSheet_Dialog_option_Handler(bottomSheetDialog);
         bottomSheetDialog.show();
     }

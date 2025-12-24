@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bottomsheet_curve"
     android:paddingHorizontal="20dp"
@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:text="Set as Lock screen"
         style="@style/bottom_sheet_options"
+
         />
     <TextView
         android:id="@+id/set_home_screen_btn"

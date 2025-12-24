@@ -1,4 +1,4 @@
-package com.rtech.eazywalls.fragments.searchFragments;
+package com.rtech.eazywalls.fragments;
 
 import android.os.Bundle;
 

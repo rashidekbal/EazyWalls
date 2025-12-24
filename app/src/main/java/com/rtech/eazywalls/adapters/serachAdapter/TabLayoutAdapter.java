@@ -1,4 +1,4 @@
-package com.rtech.eazywalls.adapters.searchActivityAdapters;
+package com.rtech.eazywalls.adapters.serachAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.rtech.eazywalls.fragments.searchFragments.Author_result_fragment;
-import com.rtech.eazywalls.fragments.searchFragments.Category_result_fragment;
-import com.rtech.eazywalls.fragments.searchFragments.Photos_result_fragment;
+import com.rtech.eazywalls.fragments.Author_result_fragment;
+import com.rtech.eazywalls.fragments.Category_result_fragment;
+import com.rtech.eazywalls.fragments.Photos_result_fragment;
 
 public class TabLayoutAdapter extends FragmentPagerAdapter {
     public TabLayoutAdapter(@NonNull FragmentManager fm) {

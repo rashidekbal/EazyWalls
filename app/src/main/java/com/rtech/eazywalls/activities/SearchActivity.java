@@ -9,7 +9,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.rtech.eazywalls.R;
-import com.rtech.eazywalls.adapters.searchActivityAdapters.TabLayoutAdapter;
+import com.rtech.eazywalls.adapters.serachAdapter.TabLayoutAdapter;
 import com.rtech.eazywalls.databinding.ActivitySearchBinding;
 
 public class SearchActivity extends AppCompatActivity {

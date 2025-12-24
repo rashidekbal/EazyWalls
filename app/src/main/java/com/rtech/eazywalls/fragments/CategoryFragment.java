@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.rtech.eazywalls.R;
 import com.rtech.eazywalls.adapters.CategoryAdapter;
 import com.rtech.eazywalls.databinding.FragmentCategoryBinding;
 import com.rtech.eazywalls.models.CategoryModel;

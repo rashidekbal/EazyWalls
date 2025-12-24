@@ -22,6 +22,7 @@ import com.rtech.eazywalls.services.DownloadService;
 import com.rtech.eazywalls.utils.CoilUtil;
 import com.rtech.eazywalls.utils.DownloadManagerUtil;
 import com.rtech.eazywalls.utils.GlideUtil;
+import com.rtech.eazywalls.utils.PageNavigatorUtil;
 
 import java.util.ArrayList;
 
@@ -122,13 +123,7 @@ public class WallpaperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     }
     private void openPreviewPage(int position){
-        Intent handlerIntent=new Intent(context, PreviewActivity.class);
-        handlerIntent.putExtra("id",wallpaperModels.get(position).getId());
-        handlerIntent.putExtra("_id",wallpaperModels.get(position).get_id());
-        handlerIntent.putExtra("url",wallpaperModels.get(position).getUrl());
-        handlerIntent.putExtra("previewUrl",wallpaperModels.get(position).getPreviewUrl());
-        handlerIntent.putExtra("isFavourite",wallpaperModels.get(position).isFavourite());
-        context.startActivity(handlerIntent);
+        PageNavigatorUtil.openPreviewPage(context,wallpaperModels.get(position));
     }
 
     @Override
