@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         app:headerLayout="@layout/navigation_view_header"
         android:layout_gravity="start"
-        app:menu="@menu/home_navigation_menu"
+        app:menu="@menu/side_bar_menu"
         android:background="@color/white"
         android:fitsSystemWindows="false"/>
 

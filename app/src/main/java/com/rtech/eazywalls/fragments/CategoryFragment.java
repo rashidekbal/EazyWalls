@@ -35,8 +35,21 @@ CategoryViewModel categoryViewModel;
         mainXml=FragmentCategoryBinding.inflate(inflater,container,false);
         // Inflate the layout for this fragment
         init();
+        setClickListeners();
         setUpRecyclerView();
         return mainXml.getRoot();
+    }
+
+    private void setClickListeners() {
+        mainXml.reloadView.setOnClickListener(v->{
+            categoryViewModel.loadCategoryWallpapers();
+            mainXml.shimmerLayout.setVisibility(View.VISIBLE);
+            mainXml.reloadView.setVisibility(View.GONE);
+        });
+        mainXml.swipeRefreshLayout.setOnRefreshListener(()->{
+            mainXml.swipeRefreshLayout.setRefreshing(true);
+            categoryViewModel.loadCategoryWallpapers();
+        });
     }
 
     private void setUpRecyclerView() {
@@ -50,13 +63,20 @@ CategoryViewModel categoryViewModel;
         categoryViewModel=new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
         categoryAdapter=new CategoryAdapter(requireContext(),categoryModels);
         categoryViewModel.getCategoryLiveData().observe(requireActivity(),categoryList->{
+            mainXml.swipeRefreshLayout.setRefreshing(false);
             if(categoryList!=null){
-                categoryModels.clear();
-                categoryModels.addAll(categoryList);
-                categoryAdapter.notifyDataSetChanged();
+                if(categoryList.isEmpty()){
+                    mainXml.reloadView.setVisibility(View.VISIBLE);
+                }else{
+                    categoryModels.clear();
+                    categoryModels.addAll(categoryList);
+                    categoryAdapter.notifyDataSetChanged();
+                    mainXml.recyclerView.setVisibility(View.VISIBLE);
+                }
                 mainXml.shimmerLayout.setVisibility(View.GONE);
-                mainXml.recyclerView.setVisibility(View.VISIBLE);
+
             }
+
 
         });
 

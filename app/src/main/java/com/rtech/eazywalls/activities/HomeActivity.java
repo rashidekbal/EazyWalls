@@ -46,10 +46,6 @@ public class HomeActivity extends AppCompatActivity {
         handlerFragmentStackChange();
         setUpActionBar();
         setUpNavigationBar();
-
-
-
-
     }
     private void init(){
         categoryViewModel=new ViewModelProvider(this).get(CategoryViewModel.class);
@@ -80,7 +76,6 @@ public class HomeActivity extends AppCompatActivity {
 
         });
     }
-
     private void setUpActionBar() {
         ActionBarDrawerToggle DrawerToggle =new ActionBarDrawerToggle(HomeActivity.this,mainXml.main,mainXml.toolBar,R.string.opendrawer,R.string.closedrawer);
         mainXml.main.addDrawerListener(DrawerToggle);
@@ -91,7 +86,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
-
     private void setUpNavigationBar(){
         mainXml.navigationMenu.setOnItemSelectedListener(menuItem -> {
             final int home=R.id.home;

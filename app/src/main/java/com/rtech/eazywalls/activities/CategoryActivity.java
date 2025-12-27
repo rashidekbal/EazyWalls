@@ -66,6 +66,15 @@ public class CategoryActivity extends AppCompatActivity {
         mainXml.backBtn.setOnClickListener(v->{
             finish();
         });
+        mainXml.reloadView.setOnClickListener(v->{
+            mainXml.shimmerLayout.setVisibility(View.VISIBLE);
+            mainXml.reloadView.setVisibility(View.GONE);
+            wallpapersViewModel.loadWallpapers();
+        });
+        mainXml.swipeRefreshLayout.setOnRefreshListener(()->{
+            mainXml.swipeRefreshLayout.setRefreshing(true);
+            wallpapersViewModel.loadWallpapers();
+        });
     }
 
     private void setUpRecyclerView() {
@@ -91,12 +100,19 @@ public class CategoryActivity extends AppCompatActivity {
         wallpaperAdapter=new WallpaperAdapter(this,wallpaperModels, WallpaperListType.COLLECTION.toString());
         wallpapersViewModel=new ViewModelProvider(this).get(WallpapersViewModel.class);
         wallpapersViewModel.getWallpapersLiveData(category.getTitle()).observe(this, wallpapersList->{
+            mainXml.swipeRefreshLayout.setRefreshing(false);
             if(wallpapersList!=null){
-                wallpaperModels.clear();
-                wallpaperModels.addAll(wallpapersList);
-                wallpaperAdapter.notifyDataSetChanged();
+                if(wallpapersList.isEmpty()){
+                    mainXml.reloadView.setVisibility(View.VISIBLE);
+                }else{
+                    wallpaperModels.clear();
+                    wallpaperModels.addAll(wallpapersList);
+                    wallpaperAdapter.notifyDataSetChanged();
+                    mainXml.recyclerView.setVisibility(View.VISIBLE);
+                }
+
                 mainXml.shimmerLayout.setVisibility(View.GONE);
-                mainXml.recyclerView.setVisibility(View.VISIBLE);
+
 
             }
 

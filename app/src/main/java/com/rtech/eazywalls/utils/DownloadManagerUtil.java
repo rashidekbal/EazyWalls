@@ -8,9 +8,11 @@ public class DownloadManagerUtil {
     private final DownloadManager downloadManager;
     public DownloadManagerUtil(Context context){
         downloadManager=(DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+
     }
     public DownloadManager getInstance(){
         return downloadManager;
     }
+
 
 }

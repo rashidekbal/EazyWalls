@@ -2,7 +2,7 @@
     <string name="app_name">EazyWalls</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="home">home</string>
+    <string name="home">Home</string>
     <string name="category">category</string>
     <string name="search">Search</string>
     <string name="setting">setting</string>
@@ -19,4 +19,10 @@
     <string name="filter_icon">filter_icon</string>
     <string name="_1270_listed_wallpapers_from_abstract_colletion">1270 listed wallpapers from abstract colletion.</string>
     <string name="Setting">Setting</string>
+    <string name="favorites">Favorites</string>
+    <string name="downloads">Downloads</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="report_an_issue">Report an issue</string>
+    <string name="reload_icon">reload_icon</string>
+    <string name="try_reloading">Try reloading</string>
 </resources>

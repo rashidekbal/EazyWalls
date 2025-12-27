@@ -35,7 +35,7 @@ public class WallpapersViewModel extends AndroidViewModel {
         }
         return  wallpapersMutableLiveData;
     }
-    private void loadWallpapers() {
+    public void loadWallpapers() {
         loading=true;
         wallpaperRepo.getWallpaperOfCategory(category,page,data-> {
             if(data.isEmpty()){isLast=true;}

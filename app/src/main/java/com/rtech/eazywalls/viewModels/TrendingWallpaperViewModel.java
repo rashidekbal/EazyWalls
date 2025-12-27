@@ -33,10 +33,12 @@ public class TrendingWallpaperViewModel extends AndroidViewModel {
         }
         return  wallpapersMutableLiveData;
     }
-    private void loadWallpapers() {
+    public void loadWallpapers() {
         loading=true;
         wallpaperRepo.getTrendingWallpaper(page,data-> {
-            if(data.isEmpty()){isLast=true;}
+            if(data!=null){
+                if(data.isEmpty()){isLast=true;}
+            }
             loading=false;
             wallpapersMutableLiveData.postValue(data);
         });
@@ -45,6 +47,9 @@ public class TrendingWallpaperViewModel extends AndroidViewModel {
         if(!isLast&&!loading){
             loading=true;
             wallpaperRepo.getTrendingWallpaper(++page,data->{
+                if(data==null){
+                    loading=false;
+                    return; }
                 if(data.isEmpty()){isLast=true;
                     loading=false;
                     return;

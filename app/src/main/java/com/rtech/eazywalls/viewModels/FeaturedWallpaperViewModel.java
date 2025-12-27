@@ -32,7 +32,7 @@ public class FeaturedWallpaperViewModel extends AndroidViewModel {
         }
         return  wallpapersMutableLiveData;
     }
-    private void loadWallpapers() {
+    public void loadWallpapers() {
         loading=true;
         wallpaperRepo.getFeaturedWallpaper(page,data-> {
             if(data.isEmpty()){isLast=true;}

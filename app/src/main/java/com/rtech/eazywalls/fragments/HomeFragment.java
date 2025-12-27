@@ -41,8 +41,23 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         mainXml=FragmentHomeBinding.inflate(inflater,container,false);
         init();
+        setUptClickListener();
         setUpRecyclerView();
         return mainXml.getRoot();
+    }
+
+    private void setUptClickListener() {
+        mainXml.reloadIcon.setOnClickListener(v->{
+            trendingWallpaperViewModel.loadWallpapers();
+            featuredWallpaperViewModel.loadWallpapers();
+            mainXml.reloadView.setVisibility(View.GONE);
+            mainXml.TrendingShimmerLayout.setVisibility(View.VISIBLE);
+        });
+        mainXml.swipeRefreshLayout.setOnRefreshListener(()->{
+            mainXml.swipeRefreshLayout.setRefreshing(true);
+            trendingWallpaperViewModel.loadWallpapers();
+            featuredWallpaperViewModel.loadWallpapers();
+        });
     }
 
     private void setUpRecyclerView() {
@@ -59,13 +74,20 @@ public class HomeFragment extends Fragment {
         featuredWallpaperViewModel=new ViewModelProvider(requireActivity()).get(FeaturedWallpaperViewModel.class);
         trendingWallpaperViewModel.getTrendingWallpapers().observe(requireActivity(),wallpaperList->{
             if(wallpaperList!=null){
-                trendingWallpapers.clear();
-                trendingWallpapers.addAll(wallpaperList);
-                //TODO: add pagination logic and notify the range change
-                wallpaperAdapter.notifyDataSetChanged();
+                if(wallpaperList.isEmpty()){
+                    mainXml.reloadView.setVisibility(View.VISIBLE);
+                    mainXml.recyclerView.setVisibility(View.GONE);
+                }else{
+                    trendingWallpapers.clear();
+                    trendingWallpapers.addAll(wallpaperList);
+                    mainXml.reloadView.setVisibility(View.GONE);
+                    mainXml.recyclerView.setVisibility(View.VISIBLE);
+                    //TODO: add pagination logic and notify the range change
+                    wallpaperAdapter.notifyDataSetChanged();
+                }
                 mainXml.TrendingShimmerLayout.setVisibility(View.GONE);
-                mainXml.recyclerView.setVisibility(View.VISIBLE);
             }
+            mainXml.swipeRefreshLayout.setRefreshing(false);
         });
         featuredWallpaperViewModel.getFeaturedWallpapers().observe(requireActivity(),data->{
             if(data!=null){

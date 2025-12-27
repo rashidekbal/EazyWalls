@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@string/home"/>
+    <item
+        android:title="@string/favorites"/>
+    <item
+        android:title="@string/downloads"/>
+    <item
+        android:title="@string/privacy_policy"/>
+    <item
+        android:title="@string/report_an_issue"/>
+
+</menu>

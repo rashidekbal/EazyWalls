@@ -26,7 +26,7 @@ public class CategoryViewModel extends AndroidViewModel {
         }
         return  categoryMutableLiveData;
     }
-    private void loadCategoryWallpapers() {
+    public void loadCategoryWallpapers() {
         categoryRepo.getCategories(data->  categoryMutableLiveData.postValue(data));
       ;
 
