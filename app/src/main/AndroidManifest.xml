@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EazyWalls">
         <activity
+            android:name=".activities.FeaturedFeedActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.OnBoardingActivity"
             android:exported="false" />
         <activity

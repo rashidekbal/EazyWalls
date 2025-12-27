@@ -57,7 +57,7 @@ public class CategoryActivity extends AppCompatActivity {
     private StringBuilder getCountTitle(int wallpaperCount) {
         StringBuilder builder=new StringBuilder();
         builder.append(wallpaperCount);
-        builder.append(" listed wallpapers from abstract collection.");
+        builder.append(" listed wallpapers from ").append(category.getTitle()).append(" collection.");
         return builder;
 
     }

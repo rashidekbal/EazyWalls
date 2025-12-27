@@ -46,7 +46,20 @@ public class HomeActivity extends AppCompatActivity {
         handlerFragmentStackChange();
         setUpActionBar();
         setUpNavigationBar();
+
     }
+
+    @Override
+    public void onBackPressed() {
+        int count= getSupportFragmentManager().getBackStackEntryCount();
+        if(count==1){
+            finish();
+        }else{
+
+            super.onBackPressed();
+        }
+    }
+
     private void init(){
         categoryViewModel=new ViewModelProvider(this).get(CategoryViewModel.class);
         trendingWallpaperViewModel= new ViewModelProvider(this).get(TrendingWallpaperViewModel.class);
@@ -55,10 +68,7 @@ public class HomeActivity extends AppCompatActivity {
     }
     private void handlerFragmentStackChange() {
         getSupportFragmentManager().addOnBackStackChangedListener(()->{
-            if(getSupportFragmentManager().getBackStackEntryCount()==0){
-                finish();
-                return;
-            }
+
             int entryCount=getSupportFragmentManager().getBackStackEntryCount();
             String entryId=getSupportFragmentManager().getBackStackEntryAt(entryCount-1).getName();
             if(entryId!=null){

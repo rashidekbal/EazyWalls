@@ -1,5 +1,6 @@
 package com.rtech.eazywalls.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rtech.eazywalls.R;
+import com.rtech.eazywalls.activities.FeaturedFeedActivity;
 import com.rtech.eazywalls.adapters.WallpaperAdapter;
 import com.rtech.eazywalls.constants.WallpaperListType;
 import com.rtech.eazywalls.databinding.FragmentHomeBinding;
@@ -114,6 +116,8 @@ public class HomeFragment extends Fragment {
             mainXml.featuredImageCountText.setText("+"+sum);
             mainXml.moreFeaturedBtn.setOnClickListener(v->{
                 //TODO:add work here
+                Intent pageIntent=new Intent(requireActivity(), FeaturedFeedActivity.class);
+                requireActivity().startActivity(pageIntent);
             });
         }
     }
