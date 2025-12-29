@@ -1,7 +1,6 @@
 package com.rtech.eazywalls.viewModels;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -28,6 +27,8 @@ public class SearchViewModel extends AndroidViewModel {
     MutableLiveData<ArrayList<WallpaperModel>> WallpaperResult=new MutableLiveData<>();
     MutableLiveData<ArrayList<CategoryModel>> CategoryResult=new MutableLiveData<>();
     public void search(String target){
+        WallpaperResult.postValue(null);
+        CategoryResult.postValue(null);
         isLoading=true;
         page=1;
         this.target=target;

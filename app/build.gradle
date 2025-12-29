@@ -29,8 +29,8 @@ android {
     buildTypes {
         debug {
 
-//            buildConfigField "String", "BASE_URL",  "\"https://eazy-walls-server.vercel.app/api\""
-            buildConfigField "String", "BASE_URL",  "\"https://rjwqzfvg-8000.inc1.devtunnels.ms/api\""
+            buildConfigField "String", "BASE_URL",  "\"https://eazy-walls-server.vercel.app/api\""
+//            buildConfigField "String", "BASE_URL",  "\"https://rjwqzfvg-8000.inc1.devtunnels.ms/api\""
         }
         release {
             //             buildConfigField "String", "BASE_URL",  "\"https://threadly-server.vercel.app/api\""
