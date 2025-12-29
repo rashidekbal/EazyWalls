@@ -13,20 +13,23 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class CategoryRepo {
+    //TODO:make the categoryId centralized to prevent duplicate ids on reload of data
     NetworkProvider networkProvider;
+    int CategoryId;
     public CategoryRepo(){
         networkProvider=new NetworkProvider();
+        this.CategoryId=0;
     }
     public void  getCategories(RepoDataResponse<ArrayList<CategoryModel>> callbackListener){
         networkProvider.get(ApiEndPoints.GET_CATEGORY, null,new JsonObjectListener() {
             @Override
             public void onSuccess(JSONObject response) {
-                int id=0;
+
                 JSONArray Data=response.optJSONArray("Data");
                 ArrayList<CategoryModel> categoryModels=new ArrayList<>();
                 for(int i = 0; i< (Data != null ? Data.length() : 0); i++){
                     JSONObject object=Data.optJSONObject(i);
-                    CategoryModel categoryModel=new CategoryModel(id++,object.optString("_id"),object.optString("title"),object.optString("previewUrl"),object.optInt("wallpaperCount"));
+                    CategoryModel categoryModel=new CategoryModel(++CategoryId,object.optString("_id"),object.optString("title"),object.optString("previewUrl"),object.optInt("wallpaperCount"));
                     categoryModels.add(categoryModel);
                 }
                 callbackListener.getData(categoryModels);

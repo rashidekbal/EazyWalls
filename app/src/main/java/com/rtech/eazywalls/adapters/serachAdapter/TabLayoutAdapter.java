@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.rtech.eazywalls.fragments.Author_result_fragment;
 import com.rtech.eazywalls.fragments.Category_result_fragment;
 import com.rtech.eazywalls.fragments.Photos_result_fragment;
 
@@ -20,26 +19,22 @@ public class TabLayoutAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if(position==0){
             return new Photos_result_fragment();
-        }else if(position==1){
-            return new Category_result_fragment();
         }else{
-            return new Author_result_fragment();
+            return new Category_result_fragment();
         }
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        if(position==0){return "Photo";} else if (position==1) {
+        if(position==0){return "Wallpaper";} else {
             return "Category";
 
-        }else{
-            return "Author";
         }
     }
 }

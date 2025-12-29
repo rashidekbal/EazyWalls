@@ -1,5 +1,7 @@
 package com.rtech.eazywalls.networking;
 
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 
 import com.androidnetworking.AndroidNetworking;
@@ -23,7 +25,6 @@ public class NetworkProvider {
                     @Override
                     public void onError(ANError anError) {
                         callbackListener.onError(anError.toString());
-
                     }
                 });
     }

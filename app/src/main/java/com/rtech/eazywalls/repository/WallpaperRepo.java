@@ -13,22 +13,24 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class WallpaperRepo {
+    //TODO:make the WallpaperId centralized to prevent duplicate ids on reload of data
     NetworkProvider networkProvider;
+    int WallpaperId;
     public WallpaperRepo(){
         networkProvider=new NetworkProvider();
+        this.WallpaperId=0;
     }
     public void getWallpaperOfCategory(String category, int page, RepoDataResponse<ArrayList<WallpaperModel>> callback){
         String Url= ApiEndPoints.GET_WALLPAPER+"?category="+category+"&page="+page;
         networkProvider.get(Url, null, new JsonObjectListener() {
             @Override
             public void onSuccess(JSONObject response) {
-                int id=0;
                 JSONArray Data=response.optJSONArray("Data");
                 ArrayList<WallpaperModel> wallpaperModels=new ArrayList<>();
                 for(int i = 0; i< (Data != null ? Data.length() : 0); i++){
                     JSONObject object=Data.optJSONObject(i);
                     WallpaperModel wallpaperModel=new WallpaperModel(
-                            id++,object.optString("_id"),
+                            ++WallpaperId,object.optString("_id"),
                             object.optString("originalUrl"),
                             object.optString("previewUrl"),
                             false
@@ -54,13 +56,12 @@ public class WallpaperRepo {
         networkProvider.get(Url, null, new JsonObjectListener() {
             @Override
             public void onSuccess(JSONObject response) {
-                int id=0;
                 JSONArray Data=response.optJSONArray("Data");
                 ArrayList<WallpaperModel> wallpaperModels=new ArrayList<>();
                 for(int i = 0; i< (Data != null ? Data.length() : 0); i++){
                     JSONObject object=Data.optJSONObject(i);
                     WallpaperModel wallpaperModel=new WallpaperModel(
-                            id++,object.optString("_id"),
+                            ++WallpaperId,object.optString("_id"),
                             object.optString("originalUrl"),
                             object.optString("previewUrl"),
                             false
@@ -86,13 +87,13 @@ public class WallpaperRepo {
         networkProvider.get(Url, null, new JsonObjectListener() {
             @Override
             public void onSuccess(JSONObject response) {
-                int id=0;
+
                 JSONArray Data=response.optJSONArray("Data");
                 ArrayList<WallpaperModel> wallpaperModels=new ArrayList<>();
                 for(int i = 0; i< (Data != null ? Data.length() : 0); i++){
                     JSONObject object=Data.optJSONObject(i);
                     WallpaperModel wallpaperModel=new WallpaperModel(
-                            id++,object.optString("_id"),
+                            ++WallpaperId,object.optString("_id"),
                             object.optString("originalUrl"),
                             object.optString("previewUrl"),
                             false
