@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class CategoryRepo {
-    //TODO:make the categoryId centralized to prevent duplicate ids on reload of data
     NetworkProvider networkProvider;
     int CategoryId;
     public CategoryRepo(){

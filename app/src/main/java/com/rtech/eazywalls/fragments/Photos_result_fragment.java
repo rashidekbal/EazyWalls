@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.rtech.eazywalls.adapters.WallpaperAdapter;
 import com.rtech.eazywalls.constants.WallpaperListType;
@@ -46,10 +47,23 @@ public class Photos_result_fragment extends Fragment {
     private void observerData(){
         searchViewModel.getWallpaperResult().observe(requireActivity(),data->{
             if(data!=null){
+                mainXml.loadingView.setVisibility(View.GONE);
+                if(data.isEmpty()){
+                    mainXml.noDataView.setVisibility(View.VISIBLE);
+                    mainXml.recyclerView.setVisibility(View.GONE);
+                    return;
+                }
+
                 wallpaperModels.clear();
                 wallpaperModels.addAll(data);
                 adapter.notifyDataSetChanged();
+                mainXml.loadingView.setVisibility(View.GONE);
+                mainXml.recyclerView.setVisibility(View.VISIBLE);
+                mainXml.noDataView.setVisibility(View.GONE);
+                return;
             }
+            mainXml.recyclerView.setVisibility(View.GONE);
+            mainXml.loadingView.setVisibility(View.VISIBLE);
         });
 
     }

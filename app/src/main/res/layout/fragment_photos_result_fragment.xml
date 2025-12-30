@@ -6,10 +6,35 @@
     tools:context=".fragments.Photos_result_fragment"
     android:background="@color/white"
     android:orientation="vertical">
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/noData_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No result found"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/loading_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <ProgressBar
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
+            android:indeterminateTint="@color/uiBlue"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         />
 
 

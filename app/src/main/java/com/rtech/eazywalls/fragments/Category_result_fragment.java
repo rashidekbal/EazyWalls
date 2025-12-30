@@ -43,10 +43,23 @@ public class Category_result_fragment extends Fragment {
     private void observerData(){
         searchViewModel.getCategoryResult().observe(requireActivity(),data->{
             if(data!=null){
+                mainXml.loadingView.setVisibility(View.GONE);
+                if(data.isEmpty()){
+                    mainXml.noDataView.setVisibility(View.VISIBLE);
+                    mainXml.recyclerView.setVisibility(View.GONE);
+                    return;
+                }
+
                 categoryModels.clear();
                 categoryModels.addAll(data);
                 adapter.notifyDataSetChanged();
+                mainXml.loadingView.setVisibility(View.GONE);
+                mainXml.recyclerView.setVisibility(View.VISIBLE);
+                mainXml.noDataView.setVisibility(View.GONE);
+                return;
             }
+            mainXml.recyclerView.setVisibility(View.GONE);
+            mainXml.loadingView.setVisibility(View.VISIBLE);
         });
 
     }
