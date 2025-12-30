@@ -120,7 +120,7 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(new Intent(HomeActivity.this, SearchActivity.class));
                     return false;
             }else if(menuId==setting){
-//                TODO: hide the bottom navigation bar when settings fragment is opened
+
                    mainXml.navigationMenu.setVisibility(View.GONE);
                    changeFragment(new SettingsMainFragment(),FragmentId.SETTINGS_MAIN_FRAGMENT.toString());
                    currentSelectedMenuItem=menuId;

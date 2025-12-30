@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class WallpaperRepo {
-    //TODO:make the WallpaperId centralized to prevent duplicate ids on reload of data
     NetworkProvider networkProvider;
     int WallpaperId;
     public WallpaperRepo(){

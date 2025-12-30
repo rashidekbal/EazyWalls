@@ -115,7 +115,6 @@ public class HomeFragment extends Fragment {
             int sum=featuredWallpapers.size()-3;
             mainXml.featuredImageCountText.setText("+"+sum);
             mainXml.moreFeaturedBtn.setOnClickListener(v->{
-                //TODO:add work here
                 Intent pageIntent=new Intent(requireActivity(), FeaturedFeedActivity.class);
                 requireActivity().startActivity(pageIntent);
             });

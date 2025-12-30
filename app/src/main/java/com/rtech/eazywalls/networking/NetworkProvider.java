@@ -19,11 +19,13 @@ public class NetworkProvider {
                 .build().getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
+//                        Log.d("network_error", "dataloaded: "+jsonObject.toString());
                         callbackListener.onSuccess(jsonObject);
                     }
 
                     @Override
                     public void onError(ANError anError) {
+//                        Log.d("network_error", "onError: "+anError.getErrorBody());
                         callbackListener.onError(anError.toString());
                     }
                 });
