@@ -25,4 +25,17 @@
     <string name="report_an_issue">Report an issue</string>
     <string name="reload_icon">reload_icon</string>
     <string name="try_reloading">Try reloading</string>
+    <string name="emptyprofile">emptyProfile</string>
+    <string name="socialicon">socialIcon</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="already_have_an_account">Already Have An Account ?</string>
+    <string name="login">Login</string>
+    <string name="or_continue_with_social_account">Or Continue With Social Account</string>
+    <string name="register">Register</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="password">Password</string>
+    <string name="enter_your_email">Enter your Email</string>
+    <string name="create_an_account_to_continue">create an account to continue</string>
+    <string name="getting_started">Getting started</string>
 </resources>

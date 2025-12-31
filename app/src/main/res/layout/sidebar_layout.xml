@@ -1,7 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/uiBlue">
+    android:layout_height="@dimen/dp_176"
+    android:background="@color/uiBlue"
+    android:padding="@dimen/dp_16"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/img_profile_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:cardCornerRadius="@dimen/dp_32"
+        >
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/dp_64"
+            android:layout_height="@dimen/dp_64"
+            android:contentDescription="Profile Picture"
+            android:src="@drawable/blank_profile"
+             />
+    </androidx.cardview.widget.CardView>
+
+
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_logged_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="txt_welcome_guest, btn_login_sidebar" />
+
+    <TextView
+        android:id="@+id/txt_welcome_guest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome, Guest"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"
+        android:textColor="@color/allWhite"
+        android:layout_marginTop="@dimen/dp_12"
+        app:layout_constraintTop_toBottomOf="@id/img_profile_holder"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/btn_login_sidebar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login / Sign Up"
+        android:textColor="@color/allWhite"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintTop_toBottomOf="@id/txt_welcome_guest"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/dp_10"/>
+
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_logged_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="txt_user_name, txt_user_email" />
+
+    <TextView
+        android:id="@+id/txt_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="John Doe"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"
+        android:textColor="@color/allWhite"
+        android:layout_marginTop="@dimen/dp_12"
+        app:layout_constraintTop_toBottomOf="@id/img_profile_holder"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="johndoe@email.com"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/allWhite"
+        app:layout_constraintTop_toBottomOf="@id/txt_user_name"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

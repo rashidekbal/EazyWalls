@@ -5,5 +5,6 @@
     <color name="uiBlue">#8768FF</color>
     <color name="nav_bar_background">@color/uiBlue</color>
     <color name="applyBtn">@color/allBlack</color>
+    <color name="inputBoxBackGround">#414753</color>
 
 </resources>

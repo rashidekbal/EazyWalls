@@ -1,35 +1,45 @@
 package com.rtech.eazywalls.activities;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.Group;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.navigation.NavigationView;
 import com.rtech.eazywalls.R;
+import com.rtech.eazywalls.activities.auth.SignUpActivity;
 import com.rtech.eazywalls.fragments.CategoryFragment;
 import com.rtech.eazywalls.fragments.HomeFragment;
 import com.rtech.eazywalls.fragments.SettingsMainFragment;
 import com.rtech.eazywalls.constants.FragmentId;
 import com.rtech.eazywalls.databinding.ActivityHomeBinding;
-import com.rtech.eazywalls.utils.ToastUtil;
 import com.rtech.eazywalls.viewModels.CategoryViewModel;
 import com.rtech.eazywalls.viewModels.TrendingWallpaperViewModel;
 
 
-
+@SuppressWarnings("deprecation")
 public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding mainXml;
     int currentSelectedMenuItem;
     TrendingWallpaperViewModel trendingWallpaperViewModel;
     CategoryViewModel categoryViewModel;
     boolean isFirstLaunch=true;
+    View navHeader;
+    TextView loginBtnSideBar;
+    Group loggedOutGroup;
+    Group loggedInGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +56,29 @@ public class HomeActivity extends AppCompatActivity {
         handlerFragmentStackChange();
         setUpActionBar();
         setUpNavigationBar();
+        handleClickListeners();
+        setUpSideBarNavigation();
 
     }
 
+    private void setUpSideBarNavigation() {
+        mainXml.sideBar.setNavigationItemSelectedListener(menuItem -> {
+            Toast.makeText(HomeActivity.this, "selected"+menuItem, Toast.LENGTH_SHORT).show();
+            mainXml.main.closeDrawers();
+            return true;
+        });
+    }
+
+    private void handleClickListeners() {
+        loginBtnSideBar.setOnClickListener(v->{
+            mainXml.main.closeDrawers();
+            startActivity(new Intent(HomeActivity.this, SignUpActivity.class));
+        });
+
+    }
+
+
+    //TODO: implement new back press callback api
     @Override
     public void onBackPressed() {
         int count= getSupportFragmentManager().getBackStackEntryCount();
@@ -65,6 +95,12 @@ public class HomeActivity extends AppCompatActivity {
         trendingWallpaperViewModel= new ViewModelProvider(this).get(TrendingWallpaperViewModel.class);
         trendingWallpaperViewModel.getTrendingWallpapers();
         categoryViewModel.getCategoryLiveData();
+        navHeader=mainXml.sideBar.getHeaderView(0);
+        loginBtnSideBar= navHeader.findViewById(R.id.btn_login_sidebar);
+        loggedOutGroup=navHeader.findViewById(R.id.group_logged_out);
+        loggedInGroup=navHeader.findViewById(R.id.group_logged_in);
+
+
     }
     private void handlerFragmentStackChange() {
         getSupportFragmentManager().addOnBackStackChangedListener(()->{

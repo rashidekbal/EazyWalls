@@ -7,4 +7,9 @@
         <item name="android:paddingVertical">@dimen/dp_8</item>
         <item name="background">?attr/selectableItemBackground</item>
     </style>
+    <style name="credInputStyle" parent="">
+    <item name="android:textSize">@dimen/sp_15</item>
+        <item name="android:paddingHorizontal">@dimen/dp_10</item>
+        <item name="android:textColor">@color/lightGreyText</item>
+    </style>
 </resources>

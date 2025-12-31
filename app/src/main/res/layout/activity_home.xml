@@ -10,15 +10,6 @@
     android:fitsSystemWindows="true"
     android:background="@color/white"
     >
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/sideBar"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:headerLayout="@layout/sidebar_layout"
-        android:layout_gravity="start"
-        android:background="@color/white"
-        android:fitsSystemWindows="false"/>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -70,21 +61,33 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginHorizontal="@dimen/dp_10"
-            app:cardCornerRadius="@dimen/dp_26">
+            app:cardCornerRadius="@dimen/dp_26"
+            android:layout_marginBottom="@dimen/dp_10">
+
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/navigation_menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:menu="@menu/home_navigation_menu"
                 android:background="@color/nav_bar_background"
-                app:itemIconTint="@color/allWhite"
+                android:elevation="0dp"
                 app:itemActiveIndicatorStyle="@style/NoIndicator"
+                app:itemIconSize="26dp"
+                app:itemIconTint="@color/allWhite"
                 app:itemRippleColor="@android:color/transparent"
                 app:labelVisibilityMode="unlabeled"
-                android:elevation="0dp"
-                app:itemIconSize="26dp"
-                />
+                app:menu="@menu/home_navigation_menu" />
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+<!--    this is kept down here bcz when kept up causes weird behaviour
+not propagating click to child's-->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/sideBar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:headerLayout="@layout/sidebar_layout"
+        android:layout_gravity="start"
+        android:background="@color/white"
+        android:fitsSystemWindows="false"
+        app:menu="@menu/side_bar_menu"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
