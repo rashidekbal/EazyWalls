@@ -44,8 +44,9 @@ hideProcessing();
 
 
         @Override
-        public void failure() {
-    hideProcessing();
+        public void failure(Task<AuthResult> taskResult) {
+            //TODO: add error handling
+            hideProcessing();
             Toast.makeText(SignUpActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
 
 
@@ -86,8 +87,9 @@ hideProcessing();
         if(!RegexValidatorsUtil.isValidEmail(email)){mainXml.email.setError("please enter a valid email");return;}
         if(password.length()<6){mainXml.password.setError("password must be at least 6 characters");return;}
         if(!password.equals(confirmPassword)){mainXml.confirmPassword.setError("passwords do not match");return;}
-        authService.createNewUser(this,email,password,authResultCallback);
         showProcessing();
+        authService.createNewUser(this,email,password,authResultCallback);
+
     }
 
     private void hideProcessing(){

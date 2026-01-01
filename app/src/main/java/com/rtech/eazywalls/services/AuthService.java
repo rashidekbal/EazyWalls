@@ -18,7 +18,7 @@ public class AuthService {
 
 
             }else{
-                callback.failure();
+                callback.failure(task);
             }
 
         });
@@ -28,7 +28,7 @@ public class AuthService {
             if(task.isSuccessful()){
                 callback.success(task);
             }else{
-                callback.failure();
+                callback.failure(task);
             }
 
         });

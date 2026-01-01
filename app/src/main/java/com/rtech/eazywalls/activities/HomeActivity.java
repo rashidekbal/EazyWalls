@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.rtech.eazywalls.Core;
 import com.rtech.eazywalls.R;
 import com.rtech.eazywalls.activities.auth.SignUpActivity;
+import com.rtech.eazywalls.databinding.SidebarLayoutBinding;
 import com.rtech.eazywalls.fragments.CategoryFragment;
 import com.rtech.eazywalls.fragments.HomeFragment;
 import com.rtech.eazywalls.fragments.SettingsMainFragment;
@@ -32,14 +33,12 @@ import com.rtech.eazywalls.viewModels.TrendingWallpaperViewModel;
 @SuppressWarnings("deprecation")
 public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding mainXml;
+    SidebarLayoutBinding sidebarLayoutBinding;
     int currentSelectedMenuItem;
     TrendingWallpaperViewModel trendingWallpaperViewModel;
     CategoryViewModel categoryViewModel;
     boolean isFirstLaunch=true;
-    View navHeader;
-    TextView loginBtnSideBar;
-    Group loggedOutGroup;
-    Group loggedInGroup;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +64,12 @@ public class HomeActivity extends AppCompatActivity {
     private void handleLoginState() {
 
         if(Core.getFireBaseauth().getCurrentUser()!=null){
-            loggedOutGroup.setVisibility(View.GONE);
-            loggedInGroup.setVisibility(View.VISIBLE);
+            sidebarLayoutBinding.groupLoggedOut.setVisibility(View.GONE);
+            sidebarLayoutBinding.groupLoggedIn.setVisibility(View.VISIBLE);
 
         }else{
-            loggedInGroup.setVisibility(View.GONE);
-            loggedOutGroup.setVisibility(View.VISIBLE);
+            sidebarLayoutBinding.groupLoggedIn.setVisibility(View.GONE);
+            sidebarLayoutBinding.groupLoggedOut.setVisibility(View.VISIBLE);
         }
 
     }
@@ -84,9 +83,14 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void handleClickListeners() {
-        loginBtnSideBar.setOnClickListener(v->{
+        sidebarLayoutBinding.btnLoginSidebar.setOnClickListener(v->{
             mainXml.main.closeDrawers();
             startActivity(new Intent(HomeActivity.this, SignUpActivity.class));
+        });
+        sidebarLayoutBinding.logOutButton.setOnClickListener(v->{
+            Core.getSharedPrefs().edit().clear().commit();
+            Core.getFireBaseauth().signOut();
+            handleLoginState();
         });
 
     }
@@ -109,10 +113,7 @@ public class HomeActivity extends AppCompatActivity {
         trendingWallpaperViewModel= new ViewModelProvider(this).get(TrendingWallpaperViewModel.class);
         trendingWallpaperViewModel.getTrendingWallpapers();
         categoryViewModel.getCategoryLiveData();
-        navHeader=mainXml.sideBar.getHeaderView(0);
-        loginBtnSideBar= navHeader.findViewById(R.id.btn_login_sidebar);
-        loggedOutGroup=navHeader.findViewById(R.id.group_logged_out);
-        loggedInGroup=navHeader.findViewById(R.id.group_logged_in);
+        sidebarLayoutBinding=SidebarLayoutBinding.bind(mainXml.sideBar.getHeaderView(0));
 
 
     }
