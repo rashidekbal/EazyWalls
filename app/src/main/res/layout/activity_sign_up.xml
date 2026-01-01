@@ -76,6 +76,7 @@
                 android:layout_marginHorizontal="@dimen/dp_20">
 
                     <EditText
+                        android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_65"
                         android:background="@drawable/input_field_background"
@@ -85,6 +86,7 @@
                         android:layout_marginBottom="20dp"
                         tools:ignore="Autofill" />
                 <EditText
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_65"
                     android:background="@drawable/input_field_background"
@@ -94,6 +96,7 @@
                     android:layout_marginBottom="20dp"
                     tools:ignore="Autofill" />
                 <EditText
+                    android:id="@+id/confirm_password"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_65"
                     android:background="@drawable/input_field_background"
@@ -102,15 +105,37 @@
                     style="@style/credInputStyle"
                     android:layout_marginBottom="20dp"
                     tools:ignore="Autofill" />
-                <androidx.appcompat.widget.AppCompatButton
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_65"
-                    android:background="@drawable/login_btn_background"
-                    android:text="@string/register"
-                    android:textColor="@color/allWhite"
-                    android:textSize="@dimen/sp_15"
-                    android:textAllCaps="false"
-                    android:paddingHorizontal="@dimen/dp_10" />
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/register_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_65"
+                        android:background="@drawable/login_btn_background"
+                        android:text="@string/register"
+                        android:textColor="@color/allWhite"
+                        android:textSize="@dimen/sp_15"
+                        android:textAllCaps="false"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <ProgressBar
+                        android:id="@+id/progressbar"
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_30"
+                        android:elevation="5dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:indeterminateTint="@color/allWhite"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:visibility="gone"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 
@@ -130,6 +155,7 @@
                 android:orientation="horizontal"
                 tools:ignore="DisableBaselineAlignment">
                 <LinearLayout
+                    android:id="@+id/facebook_login_button"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_65"
                     android:background="@drawable/facebook_login_background"
@@ -159,6 +185,7 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/google_login_button"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_65"
                     android:background="@drawable/input_filed_grey_outline"

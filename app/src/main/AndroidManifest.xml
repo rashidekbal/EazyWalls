@@ -22,7 +22,7 @@
             android:exported="false" />
         <activity
             android:name=".activities.auth.SignUpActivity"
-            android:exported="false"></activity>
+            android:exported="false"/>
         <activity
             android:name=".activities.FeaturedFeedActivity"
             android:exported="false" />

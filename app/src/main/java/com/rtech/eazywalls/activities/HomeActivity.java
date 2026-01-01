@@ -1,14 +1,14 @@
 package com.rtech.eazywalls.activities;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +16,7 @@ import androidx.constraintlayout.widget.Group;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
-
-import com.google.android.material.navigation.NavigationView;
+import com.rtech.eazywalls.Core;
 import com.rtech.eazywalls.R;
 import com.rtech.eazywalls.activities.auth.SignUpActivity;
 import com.rtech.eazywalls.fragments.CategoryFragment;
@@ -25,6 +24,7 @@ import com.rtech.eazywalls.fragments.HomeFragment;
 import com.rtech.eazywalls.fragments.SettingsMainFragment;
 import com.rtech.eazywalls.constants.FragmentId;
 import com.rtech.eazywalls.databinding.ActivityHomeBinding;
+import com.rtech.eazywalls.utils.SharedPrefs;
 import com.rtech.eazywalls.viewModels.CategoryViewModel;
 import com.rtech.eazywalls.viewModels.TrendingWallpaperViewModel;
 
@@ -53,11 +53,25 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(mainXml.getRoot());
         setSupportActionBar(mainXml.toolBar);
         init();
+        handleLoginState();
         handlerFragmentStackChange();
         setUpActionBar();
         setUpNavigationBar();
         handleClickListeners();
         setUpSideBarNavigation();
+
+    }
+
+    private void handleLoginState() {
+
+        if(Core.getFireBaseauth().getCurrentUser()!=null){
+            loggedOutGroup.setVisibility(View.GONE);
+            loggedInGroup.setVisibility(View.VISIBLE);
+
+        }else{
+            loggedInGroup.setVisibility(View.GONE);
+            loggedOutGroup.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -171,5 +185,9 @@ public class HomeActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(mainXml.fragmentHolder.getId(),fragment).addToBackStack(id).commit();
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handleLoginState();
+    }
 }
