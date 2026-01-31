@@ -5,5 +5,5 @@ import com.google.firebase.auth.AuthResult;
 
 public interface AuthResultCallback {
     void success(Task<AuthResult> taskResult);
-    void failure(Task<AuthResult> taskResult);
+    void failure(String errorCode);
 }

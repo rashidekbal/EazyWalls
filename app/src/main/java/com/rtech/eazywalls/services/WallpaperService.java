@@ -3,7 +3,9 @@ package com.rtech.eazywalls.services;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -26,7 +28,6 @@ public class WallpaperService {
         Glide.with(context).asBitmap().load(url).into(new CustomTarget<Bitmap>() {
             @Override
             public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                Log.d("wallpaperset", "onResourceReady: ");
                 boolean isSuccess=setWallpaper(resource,wallpaperManager,flag);
                 if(isSuccess){
                     callback.success();
@@ -44,11 +45,33 @@ public class WallpaperService {
     }
     public boolean setWallpaper(Bitmap resource,WallpaperManager wallpaperManager,int flag){
         try {
-            wallpaperManager.setBitmap(resource,null,true,flag);
+            wallpaperManager.setBitmap(getResizedBitmap(resource),null,true,flag);
             return true;
         } catch (IOException e) {
             return false;
         }
+
+    }
+
+    private Bitmap getResizedBitmap(Bitmap resource) {
+        DisplayMetrics displayMetrics = EazyWalls.getContext().getResources().getDisplayMetrics();
+        int screenWidth = displayMetrics.widthPixels;
+        int screenHeight = displayMetrics.heightPixels;
+
+        // Adding padding to prevent cropping (adjust padding ratio as needed)
+        Bitmap resizedBitmap = Bitmap.createBitmap(screenWidth, screenHeight, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(resizedBitmap);
+        float scaleX = (float) screenWidth / resource.getWidth();
+        float scaleY = (float) screenHeight / resource.getHeight();
+        float scale = Math.max(scaleX, scaleY); // To make sure it's scaled without losing ratio
+
+        float dx = (screenWidth - resource.getWidth() * scale) / 2;
+        float dy = (screenHeight - resource.getHeight() * scale) / 2;
+
+        canvas.translate(dx, dy);
+        canvas.scale(scale, scale);
+        canvas.drawBitmap(resource, 0, 0, null);
+        return resizedBitmap;
 
     }
 }

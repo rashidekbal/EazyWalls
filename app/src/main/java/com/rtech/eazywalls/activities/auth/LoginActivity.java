@@ -18,6 +18,7 @@ import com.rtech.eazywalls.activities.HomeActivity;
 import com.rtech.eazywalls.databinding.ActivityLoginBinding;
 import com.rtech.eazywalls.interfaces.auth.AuthResultCallback;
 import com.rtech.eazywalls.services.AuthService;
+import com.rtech.eazywalls.utils.AlertUtil;
 import com.rtech.eazywalls.utils.RegexValidatorsUtil;
 import com.rtech.eazywalls.utils.SharedPrefs;
 
@@ -44,10 +45,17 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        public void failure(Task<AuthResult> taskResult) {
+        public void failure(String errorCode) {
+
+
             hideProcessing();
-            //TODO: handle wrong Credentials
-            Toast.makeText(LoginActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
+           switch (errorCode){
+               case "ERROR_INVALID_CREDENTIAL":
+                   AlertUtil.showError(LoginActivity.this,"error","Invalid credentials");
+                   break;
+               default:
+                   AlertUtil.showError(LoginActivity.this,"error","something went wrong");
+           }
         }
     };
 
@@ -97,10 +105,20 @@ public class LoginActivity extends AppCompatActivity {
         mainXml.progressbar.setVisibility(View.GONE);
         mainXml.loginBtn.setText(R.string.register);
         mainXml.loginBtn.setEnabled(true);
+        mainXml.signUpBtn.setEnabled(true);
+        mainXml.facebookLoginButton.setEnabled(true);
+        mainXml.googleLoginButton.setEnabled(true);
+        mainXml.email.setEnabled(true);
+        mainXml.password.setEnabled(true);
     }
     private void showProcessing(){
         mainXml.progressbar.setVisibility(View.VISIBLE);
         mainXml.loginBtn.setText("");
         mainXml.loginBtn.setEnabled(false);
+        mainXml.signUpBtn.setEnabled(false);
+        mainXml.facebookLoginButton.setEnabled(false);
+        mainXml.googleLoginButton.setEnabled(false);
+        mainXml.email.setEnabled(false);
+        mainXml.password.setEnabled(false);
     }
 }

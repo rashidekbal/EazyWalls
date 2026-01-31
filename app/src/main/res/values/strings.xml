@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">EazyWalls</string>
+    <string name="client_id">985733602365-9031t840pe8vifjsdclq11dsje8lq5bt.apps.googleusercontent.com</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Home</string>

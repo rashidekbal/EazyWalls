@@ -15,9 +15,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.rtech.eazywalls.R;
+import com.rtech.eazywalls.constants.FirebaseErrorCodes;
 import com.rtech.eazywalls.databinding.ActivitySignUpBinding;
 import com.rtech.eazywalls.interfaces.auth.AuthResultCallback;
 import com.rtech.eazywalls.services.AuthService;
+import com.rtech.eazywalls.utils.AlertUtil;
 import com.rtech.eazywalls.utils.RegexValidatorsUtil;
 import com.rtech.eazywalls.utils.SharedPrefs;
 
@@ -44,10 +46,17 @@ hideProcessing();
 
 
         @Override
-        public void failure(Task<AuthResult> taskResult) {
+        public void failure(String errorCode) {
             //TODO: add error handling
             hideProcessing();
-            Toast.makeText(SignUpActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
+
+            switch (errorCode){
+                case"ERROR_EMAIL_ALREADY_IN_USE":
+                    AlertUtil.showError(SignUpActivity.this,"error","User already exists");
+                    break;
+                default:
+                    AlertUtil.showError(SignUpActivity.this,"error","something went wrong");
+            }
 
 
         }

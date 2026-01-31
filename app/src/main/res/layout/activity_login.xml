@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,7 +7,13 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".activities.auth.LoginActivity">
+
+
     <ScrollView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -102,36 +108,39 @@
                     android:textColor="@color/fb_login_background"
                     android:textAlignment="textEnd"
                     android:layout_marginVertical="20dp"/>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/loginBtn"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_65"
-                        android:background="@drawable/login_btn_background"
-                        android:text="@string/login"
-                        android:textColor="@color/allWhite"
-                        android:textSize="@dimen/sp_15"
-                        android:textAllCaps="false"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-                    <ProgressBar
-                        android:id="@+id/progressbar"
-                        android:layout_width="@dimen/dp_30"
-                        android:layout_height="@dimen/dp_30"
-                        android:elevation="5dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:indeterminateTint="@color/allWhite"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:visibility="gone"
-                        />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/loginBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_65"
+                            android:background="@drawable/login_btn_background"
+                            android:text="@string/login"
+                            android:textColor="@color/allWhite"
+                            android:textSize="@dimen/sp_15"
+                            android:textAllCaps="false"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            />
+                        <ProgressBar
+                            android:id="@+id/progressbar"
+                            android:layout_width="@dimen/dp_40"
+                            android:layout_height="@dimen/dp_40"
+                            android:elevation="5dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:indeterminateTint="@color/allWhite"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:visibility="gone"
+                            />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 
@@ -231,4 +240,4 @@
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

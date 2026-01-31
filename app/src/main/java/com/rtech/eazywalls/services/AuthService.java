@@ -2,13 +2,15 @@ package com.rtech.eazywalls.services;
 
 
 import android.app.Activity;
+import android.content.Context;
+import android.credentials.GetCredentialRequest;
+import android.os.Bundle;
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.rtech.eazywalls.Core;
+import com.rtech.eazywalls.R;
 import com.rtech.eazywalls.interfaces.auth.AuthResultCallback;
-import com.rtech.eazywalls.utils.SharedPrefs;
 
 public class AuthService {
     public void createNewUser(Activity activity, String email, String password, AuthResultCallback callback){
@@ -18,7 +20,12 @@ public class AuthService {
 
 
             }else{
-                callback.failure(task);
+                Exception e=task.getException();
+                if(e instanceof FirebaseAuthException){
+                    String errorCode=((FirebaseAuthException)e).getErrorCode();
+                    callback.failure(errorCode);
+
+                }
             }
 
         });
@@ -28,12 +35,18 @@ public class AuthService {
             if(task.isSuccessful()){
                 callback.success(task);
             }else{
-                callback.failure(task);
+                Exception e=task.getException();
+                if(e instanceof FirebaseAuthException){
+                    String errorCode=((FirebaseAuthException)e).getErrorCode();
+                    callback.failure(errorCode);
+
+                }
             }
 
         });
     }
-    public void LoginGoogle(){}
+    public void LoginGoogle(Context context){
+           }
     public void LoginFacebook(){}
 
 
